@@ -1,0 +1,3 @@
+#INCLUDE "no-directives.bas"
+
+let b1 = 2
