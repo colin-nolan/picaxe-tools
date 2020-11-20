@@ -33,19 +33,22 @@ function preprocess_and_expect() {
     local source_location="$1"
     local expected_location="$2"
     run preprocess "${source_location}"
-    # >&2 echo "Preprocessor output: ${output}"
+    >&2 echo "Preprocessor output: ${output}"
     [ "${status}" -eq 0 ]
     diff -B <(echo "${output}") "${resources_location}/${expected_location}"
 }
 
-@test "processes when no directives" {
-    preprocess_and_expect no-directives.bas no-directives.bas
-}
+# @test "processes when no directives" {
+#     preprocess_and_expect no-directives.bas no-directives.bas
+# }
 
-@test "processes Jinja2 imports" {
-    preprocess_and_expect import.bas.j2 merged-template.bas
-}
+# @test "processes Jinja2 imports" {
+#     preprocess_and_expect import.bas.j2 merged-template.bas
+# }
 
-@test "processes PICAXE imports" {
-    preprocess_and_expect import.basinc merged-template.bas
+# @test "processes PICAXE imports" {
+#     preprocess_and_expect import.basinc merged-template.bas
+# }
+@test "processes import with parent directory in path" {
+    preprocess_and_expect nested/import-parent.bas.j2 merged-template.bas
 }
