@@ -1,8 +1,18 @@
 #!/usr/bin/env bash
 
 set -euf -o pipefail
+shopt -s expand_aliases
 
 script_location="$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null 2>&1 && pwd)"
+
+if [[ "$(uname)" == "Darwin" ]]; then
+    which greadlink > /dev/null && {
+		alias readlink=greadlink
+	} || {
+		>&2 echo "GNU utils is required on Mac"
+		exit 1
+	}
+fi
 
 input_location="$1"
 input_location="$(readlink -f "${input_location}")"
@@ -13,5 +23,6 @@ function parse_includes() {
 }
 
 pushd "$(dirname "${input_location}")" > /dev/null
-"${script_location}/jinja2_wrapper.py" <(parse_includes "${input_location}")
+context="$(readlink -f "$(dirname "${input_location}")")"
+"${script_location}/jinja2-wrapper.py" <(parse_includes "${input_location}") "${context}"
 popd > /dev/null
