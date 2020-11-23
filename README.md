@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/colin-nolan/docker-picaxe.svg?branch=main)](https://travis-ci.com/colin-nolan/docker-picaxe)
+
 # Docker PICAXE Compilers
 _PICAXE compilers in Docker_
 
