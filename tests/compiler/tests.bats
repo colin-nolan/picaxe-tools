@@ -3,10 +3,10 @@
 set -euf -o pipefail
 
 repository_location="$(cd "${BATS_TEST_DIRNAME}" && git rev-parse --show-toplevel)"
-context="${repository_location}/compilers"
+context="${repository_location}/compiler"
 
 function setup_file() {
-    image_name="picaxe-compilers-test:${RANDOM}"
+    image_name="picaxe-compiler-test:${RANDOM}"
     export image_name
     docker build -t "${image_name}" "${context}"
 }

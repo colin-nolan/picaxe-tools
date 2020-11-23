@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -euf -o pipefail
+
+: ${COMPILER_SPY_WRITE_LOCATION}
+
+echo -n "$@" > "${COMPILER_SPY_WRITE_LOCATION}"

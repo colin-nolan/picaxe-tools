@@ -3,7 +3,7 @@
 set -euf -o pipefail
 shopt -s expand_aliases
 
-script_location="$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null 2>&1 && pwd)"
+script_directory="$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null 2>&1 && pwd)"
 
 if [[ "$(uname)" == "Darwin" ]]; then
     which greadlink > /dev/null && {
@@ -14,8 +14,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
 	}
 fi
 
-input_location="$1"
-input_location="$(readlink -f "${input_location}")"
+input_location="$(readlink -f "$1")"
 
 function parse_includes() {
     local input_location="$1"
@@ -24,5 +23,5 @@ function parse_includes() {
 
 pushd "$(dirname "${input_location}")" > /dev/null
 context="$(readlink -f "$(dirname "${input_location}")")"
-"${script_location}/jinja2-wrapper.py" <(parse_includes "${input_location}") "${context}"
+"${script_directory}/jinja2-wrapper.py" <(parse_includes "${input_location}") "${context}"
 popd > /dev/null

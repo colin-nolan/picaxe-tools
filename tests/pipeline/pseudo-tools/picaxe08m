@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -euf -o pipefail
+
+>&2 echo "$(basename "$0") pseudo tool called"
