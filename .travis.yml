@@ -1,0 +1,16 @@
+---
+
+language: minimal
+
+services:
+  - docker
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get -y install parallel python3 python3-venv
+  - sudo git clone --branch=master --depth=1 https://github.com/bats-core/bats-core /usr/local/src/bats-core
+  - sudo /usr/local/src/bats-core/install.sh /usr/local
+
+script:
+  - bats --timing --jobs "$(nproc)" -r ./tests/
+ 
