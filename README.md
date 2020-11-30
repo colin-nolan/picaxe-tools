@@ -56,7 +56,7 @@ If the syntax is
 _Hint: the pre-processed code can be redirected to a file and used with the simulator in the [PE6 Editor](https://picaxe.com/software/picaxe/picaxe-editor-6/)._
 
 #### Pre-process + Compile (syntax check) + Upload
-It is assumed by default that connection to the PICAXE is via USB cable (device: `/dev/ttyusb0`):
+It is assumed by default that connection to the PICAXE is via USB cable (device: `/dev/ttyUSB0`):
 ```
 ./picaxe -vvv --chip picaxe20m2 /path/to/code.bas
 ```
