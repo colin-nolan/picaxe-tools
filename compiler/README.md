@@ -1,6 +1,4 @@
 # Docker PICAXE Compilers
-_PICAXE compilers in Docker_
-
 ## Building
 To build the image from source:
 ```

@@ -1,8 +1,8 @@
 FROM alpine as downloader
 
 RUN apk add \
-    curl \
-    tar
+        curl \
+        tar
 
 ARG COMPILERS_LOCATION=https://picaxe.com/downloads/picaxe.tgz
 

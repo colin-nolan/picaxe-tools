@@ -15,9 +15,13 @@ function setup() {
     export PICAXE_CHIP=picaxe08m
     export PICAXE_LOG_LEVEL="${INFO_LOG_LEVEL}"
     export COMPILER_SPY_WRITE_LOCATION="${temp_directory}/compiler-spy"
+    export entered_python_env=false
 }
 
 function teardown() {
+    if "${entered_python_env}"; then
+        deactivate
+    fi
     rm -rf "${temp_directory}"
 }
 
@@ -31,6 +35,7 @@ function setup_env_with_jinja2() {
     python3 -m venv "${temp_directory}/venv"
     . "${temp_directory}/venv/bin/activate"
     pip install jinja2
+    entered_python_env=true
 }
 
 function setup_env_with_picaxe_tools() {
@@ -41,8 +46,13 @@ function setup_env_with_picaxe_tools() {
 ##################################################
 # Happy path
 ##################################################
-@test "help available" {
+@test "help available with -h" {
     run_entrypoint -h
+    [ "${status}" -eq 0 ]
+}
+
+@test "help available with --help" {
+    run_entrypoint --help
     [ "${status}" -eq 0 ]
 }
 
@@ -54,7 +64,7 @@ function setup_env_with_picaxe_tools() {
 @test "syntax check with valid input without Docker" {
     setup_env_with_jinja2
     setup_env_with_picaxe_tools
-    run_entrypoint -s -n "${valid_code_1_location}"
+    run_entrypoint --syntax-only -n "${valid_code_1_location}"
     [ "${status}" -eq 0 ]
 }
 
@@ -159,7 +169,7 @@ function setup_env_with_picaxe_tools() {
         skip "picaxe08m already on the path"
     }
     setup_env_with_jinja2
-    run_entrypoint -r -n "${valid_code_1_location}"
+    run_entrypoint --compiler-only --no-docker "${valid_code_1_location}"
     [ "${status}" -eq "${MISSING_COMPILER_STATUS_CODE}" ]
 }
 
@@ -179,7 +189,7 @@ function setup_env_with_picaxe_tools() {
 }
 
 @test "invalid input compiler" {
-    run_entrypoint -c picaxe999m9 "${valid_code_1_location}"
+    run_entrypoint --chip picaxe999m9 "${valid_code_1_location}"
     [ "${status}" -eq "${UNKNOWN_CHIP_STATUS_CODE}" ]
 }
 
@@ -189,6 +199,6 @@ function setup_env_with_picaxe_tools() {
 }
 
 @test "non-PICAXE device" {
-    run_entrypoint -d /dev/tty "${valid_code_1_location}"
+    run_entrypoint --device /dev/tty "${valid_code_1_location}"
     [ "${status}" -eq "${COMPILE_AND_UPLOAD_FAIL_STATUS_CODE}" ]
 }

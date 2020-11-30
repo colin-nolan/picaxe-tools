@@ -7,6 +7,11 @@ script_directory="$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null 2>&1 && pwd)
 . "${script_directory}/logging.sh"
 . "${script_directory}/constants.sh"
 
+if [[ "${PICAXE_LOG_LEVEL}" -ge "${DEBUG_LOG_LEVEL}" ]]; then
+    log_info "Turning on set -x (debug log level)"
+    set -x
+fi
+
 code_location="$1"
 no_docker="$2"
 

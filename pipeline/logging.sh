@@ -1,17 +1,24 @@
 #!/usr/bin/env false
 
-PICAXE_LOG_LEVEL="${PICAXE_LOG_LEVEL:-${INFO_LOG_LEVEL}}"
-
 function log_info() {
     local message="$1"
-    if [[ "${PICAXE_LOG_LEVEL}" -ge "${INFO_PLUS_LOG_LEVEL}" ]]; then
-        >&2 echo "${message}"
-    fi
+    log "Info\t${message}" "${INFO_LOG_LEVEL}" 
+}
+
+function log_warning() {
+    local message="$1"
+    log "Warning\t${message}" "${WARN_LOG_LEVEL}"
 }
 
 function log_error() {
     local message="$1"
-    if [[ "${PICAXE_LOG_LEVEL}" -ge "${CRITICAL_LOG_LEVEL}" ]]; then
-        >&2 echo "${message}"
+    log "Error\t${message}" "${CRITICAL_LOG_LEVEL}" 
+}
+
+function log() {
+    local message="$1"
+    local level="$2"
+    if [[ "${level}" -le "${PICAXE_LOG_LEVEL}" ]]; then
+        >&2 echo -e "${message}"
     fi
 }
