@@ -13,7 +13,7 @@
 To use this software, you will need:
 - [Docker](https://docs.docker.com/get-docker) (will build suitable images automatically)
 or
-- (`jinja2`)[https://pypi.org/project/Jinja2], [Python3](https://www.python.org/downloads/), and 
+- [Jinja2](https://pypi.org/project/Jinja2), [Python3](https://www.python.org/downloads/), and 
   [PICAXE compilers](https://picaxe.com/software/drivers/picaxe-compilers) [on your PATH](https://linuxize.com/post/how-to-add-directory-to-path-in-linux/).
 
 
@@ -21,7 +21,7 @@ Clone this repository:
 ```
 git clone https://github.com/colin-nolan/docker-picaxe.git
 ```
-Then call the `picaxe` executable.
+Then call the `picaxe` executable (e.g. `/some/location/docker-picaxe/picaxe`).
 
 For a permanent installation, you may wish to clone the repository into `/usr/local/src/docker-picaxe` and symlink 
 the `picaxe` binary into `/usr/local/bin`.
@@ -68,7 +68,7 @@ The usual COM1 link location is `/dev/ttyS0`:
 
 
 ## Notes
-## Motivation
+### Motivation
 [PICAXE chips](https://picaxe.com/hardware/picaxe-chips) are great devices - they are cheap, resilient, and versatile.
 However, the tooling is a little disappointing, particularly outside the Windows environment. This work makes the 
 compilers a little easier to use on (e.g. in a CI environment).
@@ -82,11 +82,12 @@ the modern [Jinja2](https://jinja.palletsprojects.com) template engine, which ca
 If you require cross-platform support of the original directives, [this effort has been made in the community](https://github.com/Patronics/PicaxePreprocess) to preprocess some of them.
 
 ### Exit Codes
-The exit codes that the program gives have a meaning - see [constants.sh for details](./constants.sh). There can be useful
+The exit codes that the program gives have a meaning - see [the constants file for details](./pipeline/constants.sh). There can be useful
 if used as part of a script or if logging is turned down.
 
 ### Long Format Arguments
 Yes: `--chip picaxe08m2`
+
 No: `--chip=picaxe08m2`
 
 

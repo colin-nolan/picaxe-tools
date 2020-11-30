@@ -28,7 +28,7 @@ function teardown() {
 function run_entrypoint() {
     run "${entrypoint_script}" $@
     >&2 echo "Status code: ${status}"
-    >&2 echo "Output: |${output}|"
+    >&2 echo "Output (between |bars|): |${output}|"
 }
 
 function setup_env_with_jinja2() {
@@ -87,7 +87,7 @@ function setup_env_with_picaxe_tools() {
 @test "log env configuration overriden by CLI configuration" {
     setup_env_with_jinja2
     setup_env_with_picaxe_tools
-    PICAXE_LOG_LEVEL=0 run_entrypoint -vv -s "${valid_code_1_location}"
+    PICAXE_LOG_LEVEL=0 run_entrypoint -vvv -s "${valid_code_1_location}"
     [ "${status}" -eq 0 ]
     [[ "${output}" != "" ]]
 }
