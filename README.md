@@ -10,21 +10,18 @@
 
 
 ## Installation
-To use this software, you will need:
-- [Docker](https://docs.docker.com/get-docker) (will build suitable images automatically)
-or
-- [Jinja2](https://pypi.org/project/Jinja2), [Python3](https://www.python.org/downloads/), and 
-  [PICAXE compilers](https://picaxe.com/software/drivers/picaxe-compilers) [on your PATH](https://linuxize.com/post/how-to-add-directory-to-path-in-linux/).
+To use this software, you will need [Jinja2](https://pypi.org/project/Jinja2), [Python3](https://www.python.org/downloads/), and 
+[PICAXE compilers](https://picaxe.com/software/drivers/picaxe-compilers) [on your PATH](https://linuxize.com/post/how-to-add-directory-to-path-in-linux/)
+or [Docker](https://docs.docker.com/get-docker) (will build suitable images automatically).
 
-
-Clone this repository:
+Clone the repository:
 ```
 git clone https://github.com/colin-nolan/docker-picaxe.git
 ```
-Then call the `picaxe` executable (e.g. `/some/location/docker-picaxe/picaxe`).
+Then call the `picaxe` executable, `./picaxe`.
 
 For a permanent installation, you may wish to clone the repository into `/usr/local/src/docker-picaxe` and symlink 
-the `picaxe` binary into `/usr/local/bin`.
+the `picaxe` file into `/usr/local/bin`, e.g `ln -s /usr/local/src/docker-picaxe/picaxe /usr/local/bin`.
 
 
 ## Usage
@@ -77,7 +74,7 @@ compilers a little easier to use on (e.g. in a CI environment).
 For some reason, the official pre-processor is only distributed for Windows, bundled with the PE6 editor. 
 However, given that most interesting directives (e.g. `#macro`) are arguably not particularly well designed, this 
 work does not attempt to provide a like-for-like replacement for the originally pre-processor. Instead, it uses
-the modern [Jinja2](https://jinja.palletsprojects.com) template engine, which can be used to achieve 
+the modern [Jinja2](https://jinja.palletsprojects.com) template engine, which can be used to achieve thr same results.
 
 If you require cross-platform support of the original directives, [this effort has been made in the community](https://github.com/Patronics/PicaxePreprocess) to preprocess some of them.
 
