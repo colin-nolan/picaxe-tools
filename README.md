@@ -16,7 +16,7 @@ or [Docker](https://docs.docker.com/get-docker) (will build suitable images auto
 
 Clone the repository:
 ```
-git clone https://github.com/colin-nolan/docker-picaxe.git
+git clone https://github.com/colin-nolan/docker-tools.git
 ```
 Then call the `picaxe` executable, `./picaxe`.
 
