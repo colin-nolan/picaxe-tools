@@ -68,7 +68,7 @@ The usual COM1 link location is `/dev/ttyS0`:
 ### Motivation
 [PICAXE chips](https://picaxe.com/hardware/picaxe-chips) are great devices - they are cheap, resilient, and versatile.
 However, the tooling is a little disappointing, particularly outside the Windows environment. This work makes the 
-compilers a little easier to use on (e.g. in a CI environment).
+compilers a little easier to use (e.g. in a CI environment).
 
 ### Pre-Processor
 For some reason, the official pre-processor is only distributed for Windows, bundled with the PE6 editor. 
