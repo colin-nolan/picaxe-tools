@@ -45,7 +45,7 @@ if ! "${no_docker}"; then
         fi
         extra_flags="--device "${picaxe_device}""
     fi
-    prefix="docker run --rm -v "${code_location}:/code.bas:ro" ${extra_flags} "${COMPILER_DOCKER_IMAGE_NAME}""
+    prefix="docker run --rm -v "${code_location}:/${code_location}:ro" ${extra_flags} "${COMPILER_DOCKER_IMAGE_NAME}""
 else
     which "${picaxe_chip}" 2>&1 > /dev/null || {
         log_error "${picaxe_chip} compiler not on the path (hint: add compilers directory to your path with 'export PATH=\"\${PATH}:/directory/of/compilers\"')"
@@ -65,7 +65,7 @@ else
     picaxe_tool_display=/dev/null
 fi
 
-${prefix} "${picaxe_chip}" ${device_option} ${syntax_flag} /code.bas > "${picaxe_tool_display}" || {
+${prefix} "${picaxe_chip}" ${device_option} ${syntax_flag} "${code_location}" > "${picaxe_tool_display}" || {
     if "${syntax_only}"; then
         log_error "Syntax check failed"
         exit "${SYNTAX_CHECK_FAIL_STATUS_CODE}"

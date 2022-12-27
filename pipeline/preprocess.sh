@@ -22,7 +22,9 @@ if ! "${no_docker}"; then
         log_info "Image not built: ${PREPROCESSOR_DOCKER_IMAGE_NAME}"
         docker build -t "${PREPROCESSOR_DOCKER_IMAGE_NAME}" "${script_directory}/../preprocessor" > /dev/null
     }
-    docker run --rm -v "${code_location}:/code.bas:ro" "${PREPROCESSOR_DOCKER_IMAGE_NAME}" /code.bas
+    # FIXME: mount locations correctly!
+    log_warning "Assuming that the code location (and all imports) are under the PWD (auto mounting not yet supported...)"
+    docker run --rm -v "${PWD}:${PWD}:ro" "${PREPROCESSOR_DOCKER_IMAGE_NAME}" "${code_location}"
 else
     python3 -c "import jinja2" 2> /dev/null || {
         log_error "jinja2 not installed (hint: jinja2 can be installed with 'pip install jinja2')"
