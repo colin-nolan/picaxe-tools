@@ -9,7 +9,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
 	} || {
 		>&2 echo "GNU utils is required on Mac"
         # Note: this must map to MAC_RUNTIME_STATUS_CODE (not imported at this point)
-		exit 19     
+		exit 19
 	}
 fi
 
@@ -62,14 +62,13 @@ for argument in "$@"; do
                 done < <(echo -n "${argument}" | sed -E 's|^-||')
 
                 if ! "${non_verbosity_flag}"; then
-                    previous_log_level="${PICAXE_LOG_LEVEL}"
                     PICAXE_LOG_LEVEL="${number_of_v}"
                     set -- "$@"
                 else
                     set -- "$@" "$argument"
                 fi
                 ;;
-            *)  
+            *)
                 set -- "$@" "${argument}"
                 ;;
     esac
@@ -90,20 +89,20 @@ fi
 for argument in "$@"; do
     shift
         case "${argument}" in
-            "--chip") 
-                set -- "$@" "-c" 
+            "--chip")
+                set -- "$@" "-c"
                 ;;
             "--device")
-                set -- "$@" "-d" 
+                set -- "$@" "-d"
                 ;;
-            "--help") 
-                set -- "$@" "-h" 
+            "--help")
+                set -- "$@" "-h"
                 ;;
-            "--no-docker")   
-                set -- "$@" "-n" 
+            "--no-docker")
+                set -- "$@" "-n"
                 ;;
-            "--output-preprocessed")   
-                set -- "$@" "-o" 
+            "--output-preprocessed")
+                set -- "$@" "-o"
                 ;;
             "--preprocessor-only")
                 set -- "$@" "-p"
@@ -119,7 +118,7 @@ for argument in "$@"; do
                 print_usage
                 exit "${INVALID_ARGUMENT_STATUS_CODE}"
                 ;;
-            *)       
+            *)
                 set -- "$@" "${argument}"
                 ;;
     esac
@@ -163,15 +162,15 @@ while getopts ":c:d:hnoprs" option; do
             no_docker=true
             log_info "No Docker mode enabled"
             ;;
-        o) 
+        o)
             output_preprocessed=true
             log_info "Outputting preprocessed (on /dev/stdout)"
             ;;
-        p) 
+        p)
             preprocess_only=true
             log_info "Processing only"
             ;;
-        r) 
+        r)
             compile_only=true
             log_info "Compiling only"
             ;;
@@ -179,7 +178,7 @@ while getopts ":c:d:hnoprs" option; do
             syntax_only=true
             log_info "Syntax check only"
             ;;
-        \?) 
+        \?)
             log_error "Invalid option: ${OPTARG}"
             print_usage
             exit "${INVALID_ARGUMENT_STATUS_CODE}"
@@ -240,7 +239,7 @@ if ! "${compile_only}"; then
     log_info "Pre-processing..."
 
     processed_code_location="${temp_directory}/processed-code.bas"
-    if "${output_preprocessed}"; then 
+    if "${output_preprocessed}"; then
         preprocessed_display_location=/dev/stdout
     else
         preprocessed_display_location=/dev/null

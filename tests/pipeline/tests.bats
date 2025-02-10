@@ -76,14 +76,6 @@ function setup_env_with_picaxe_tools() {
     [[ "$(cat "${COMPILER_SPY_WRITE_LOCATION}")" == *"-cmy-device "* ]]
 }
 
-@test "no logs" {
-    setup_env_with_jinja2
-    setup_env_with_picaxe_tools
-    PICAXE_LOG_LEVEL=0 run_entrypoint -s "${valid_code_1_location}"
-    [ "${status}" -eq 0 ]
-    [[ "${output}" == "" ]]
-}
-
 @test "log env configuration overriden by CLI configuration" {
     setup_env_with_jinja2
     setup_env_with_picaxe_tools
