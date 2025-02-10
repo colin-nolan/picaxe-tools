@@ -1,8 +1,8 @@
-[![Build Status](https://travis-ci.com/colin-nolan/docker-picaxe.svg?token=wHcb6TtzYWvisvZKjFKh&branch=main)](https://travis-ci.com/colin-nolan/docker-picaxe)
+[![Tests CI](https://github.com/colin-nolan/docker-picaxe/workflows/tests.yml/badge.svg)](https://github.com/colin-nolan/docker-picaxe/actions/workflows/tests.yml)
 
 # PICAXE Programming Tools
 ## Overview
-- Automated Docker-based setup that allows easy, cross-platform PICAXE programming. 
+- Automated Docker-based setup that allows easy, cross-platform PICAXE programming.
 - Works on Mac, Linux (not yet armhf) and Windows.
 - [Jinja2](https://jinja.palletsprojects.com) for powerful, cross-platform pre-processing.
 - Cross-platform support for the [`include` directive](https://picaxe.com/basic-commands/directives/hash-include/).
@@ -10,7 +10,7 @@
 
 
 ## Installation
-To use this software, you will need [Jinja2](https://pypi.org/project/Jinja2), [Python3](https://www.python.org/downloads/), and 
+To use this software, you will need [Jinja2](https://pypi.org/project/Jinja2), [Python3](https://www.python.org/downloads/), and
 [PICAXE compilers](https://picaxe.com/software/drivers/picaxe-compilers) [on your PATH](https://linuxize.com/post/how-to-add-directory-to-path-in-linux/)
 or [Docker](https://docs.docker.com/get-docker) (will build suitable images automatically).
 
@@ -20,7 +20,7 @@ git clone https://github.com/colin-nolan/docker-tools.git
 ```
 Then call the `picaxe` executable, `./picaxe`.
 
-For a permanent installation, you may wish to clone the repository into `/usr/local/src/docker-picaxe` and symlink 
+For a permanent installation, you may wish to clone the repository into `/usr/local/src/docker-picaxe` and symlink
 the `picaxe` file into `/usr/local/bin`, e.g `ln -s /usr/local/src/docker-picaxe/picaxe /usr/local/bin`.
 
 
@@ -67,12 +67,12 @@ The usual COM1 link location is `/dev/ttyS0`:
 ## Notes
 ### Motivation
 [PICAXE chips](https://picaxe.com/hardware/picaxe-chips) are great devices - they are cheap, resilient, and versatile.
-However, the tooling is a little disappointing, particularly outside the Windows environment. This work makes the 
+However, the tooling is a little disappointing, particularly outside the Windows environment. This work makes the
 compilers a little easier to use (e.g. in a CI environment).
 
 ### Pre-Processor
-For some reason, the official pre-processor is only distributed for Windows, bundled with the PE6 editor. 
-However, given that most interesting directives (e.g. `#macro`) are arguably not particularly well designed, this 
+For some reason, the official pre-processor is only distributed for Windows, bundled with the PE6 editor.
+However, given that most interesting directives (e.g. `#macro`) are arguably not particularly well designed, this
 work does not attempt to provide a like-for-like replacement for the originally pre-processor. Instead, it uses
 the modern [Jinja2](https://jinja.palletsprojects.com) template engine, which can be used to achieve thr same results.
 
