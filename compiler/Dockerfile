@@ -1,4 +1,4 @@
-FROM alpine as downloader
+FROM alpine AS downloader
 
 RUN apk add \
         curl \
