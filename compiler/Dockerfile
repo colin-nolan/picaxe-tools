@@ -1,8 +1,8 @@
 FROM alpine AS downloader
 
 RUN apk add \
-        curl \
-        tar
+    curl \
+    tar
 
 ARG COMPILERS_LOCATION=https://picaxe.com/downloads/picaxe.tgz
 
@@ -10,7 +10,7 @@ RUN mkdir /opt/picaxe \
     && curl -fsSL "${COMPILERS_LOCATION}" | tar -xzvC /opt/picaxe
 
 
-FROM ubuntu:20.04
+FROM ubuntu:24.04
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
