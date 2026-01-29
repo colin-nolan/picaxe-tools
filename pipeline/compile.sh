@@ -43,7 +43,7 @@ if ! "${no_docker}"; then
             log_error "Device not found: ${picaxe_device}"
             exit "${DEVICE_NOT_FOUND_STATUS_CODE}"
         fi
-        extra_flags="--device ${picaxe_device}:${picaxe_device}:rw"
+        extra_flags="--device ${picaxe_device}"
     fi
     prefix="docker run --rm -v "${code_location}:/${code_location}:ro" ${extra_flags} ${COMPILER_DOCKER_IMAGE_NAME}"
 else
