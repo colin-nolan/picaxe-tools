@@ -30,7 +30,7 @@ def render(file_location: str, context: str):
     with open(file_location) as file:
         contents = file.read()
         template = Environment(loader=AnyFileSystemLoader(context, followlinks=True)).from_string(contents)
-        print(template.render())
+        print(template.render(env=dict(os.environ)))
 
 
 if __name__ == "__main__":

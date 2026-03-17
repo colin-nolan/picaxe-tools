@@ -75,6 +75,8 @@ For some reason, the official pre-processor is only distributed for Windows, bun
 However, given that most interesting directives (e.g. `#macro`) are arguably not particularly well designed, this
 work does not attempt to provide a like-for-like replacement for the originally pre-processor. Instead, it uses
 the modern [Jinja2](https://jinja.palletsprojects.com) template engine, which can be used to achieve thr same results.
+Templates receive the current process environment via `env`, so values can be referenced with expressions, such as
+`{{ env["PICAXE_TEMPLATE_VALUE"] }}`.
 
 If you require cross-platform support of the original directives, [this effort has been made in the community](https://github.com/Patronics/PicaxePreprocess) to preprocess some of them.
 

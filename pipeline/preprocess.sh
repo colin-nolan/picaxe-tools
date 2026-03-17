@@ -24,7 +24,12 @@ if ! "${no_docker}"; then
     }
     log_warning "Assuming that the code imports are under the same directory as the code location"
     mount_directory="$(dirname "$(realpath "${code_location}")")"
-    docker run --rm -v "${mount_directory}:${mount_directory}:ro" "${PREPROCESSOR_DOCKER_IMAGE_NAME}" "${code_location}"
+    docker_environment_args=()
+    while IFS='=' read -r environment_variable_name _; do
+        [[ "${environment_variable_name}" =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]] || continue
+        docker_environment_args+=(--env "${environment_variable_name}")
+    done < <(env)
+    docker run --rm "${docker_environment_args[@]}" -v "${mount_directory}:${mount_directory}:ro" "${PREPROCESSOR_DOCKER_IMAGE_NAME}" "${code_location}"
 else
     python3 -c "import jinja2" 2> /dev/null || {
         log_error "jinja2 not installed (hint: jinja2 can be installed with 'pip install jinja2')"
