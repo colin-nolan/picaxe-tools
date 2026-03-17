@@ -53,3 +53,10 @@ function preprocess_and_expect() {
 @test "processes import with parent directory in path" {
     preprocess_and_expect nested/import-parent.bas.j2 merged-template.bas
 }
+
+@test "processes Jinja2 environment variables" {
+    run docker run -e PICAXE_TEMPLATE_VALUE=7 -v "${resources_location}":/data:ro -w /data --rm "${image_name}" env.bas.j2
+    >&2 echo "Preprocessor output: ${output}"
+    [ "${status}" -eq 0 ]
+    diff -B <(echo "${output}") "${resources_location}/env-template.bas"
+}

@@ -115,6 +115,12 @@ function setup_env_with_picaxe_tools() {
     [[ "$(cat "${COMPILER_SPY_WRITE_LOCATION}")" == *"-c/dev/2 "* ]]
 }
 
+@test "preprocessor templates can read environment variables" {
+    PICAXE_LOG_LEVEL=0 PICAXE_TEMPLATE_VALUE=7 run_entrypoint -o -p "${resources_location}/env-template.bas.j2"
+    [ "${status}" -eq 0 ]
+    diff -B <(echo "${output}") "${resources_location}/env-template.bas"
+}
+
 
 ##################################################
 # Unhappy path
